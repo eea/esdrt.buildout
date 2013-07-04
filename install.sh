@@ -44,6 +44,13 @@ echo "Installing zc.buildout: $ ./bin/easy_install" $ZCBUILDOUT
 echo "Disabling the SSL CERTIFICATION for git"
 git config --global http.sslVerify false
 
+#Copy templates from .core master
+TMP_CHECKOUT="/tmp/eea.plonebuildout.core"
+git clone git@github.com:eea/eea.plonebuildout.core.git $TMP_CHECKOUT
+mkdir -p ./buildout-configs/templates
+cp -r $TMP_CHECKOUT/buildout-configs/templates ./buildout-configs/
+rm -rf $TMP_CHECKOUT
+
 echo ""
 echo "==========================================================="
 echo "All set. Now you can run ./bin/buildout or ./bin/develop rb"
