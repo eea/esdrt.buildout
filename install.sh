@@ -35,16 +35,13 @@ echo "Running: python2.6 /tmp/virtualenv.py --clear ."
 python2.6 "/tmp/virtualenv.py" --clear --distribute  .
 rm /tmp/virtualenv.py*
 
-#echo "Updating distribute: ./bin/easy_install" $SETUPTOOLS
-#./bin/easy_install $DISTRIBUTE
-
 echo "Installing zc.buildout: $ ./bin/easy_install" $ZCBUILDOUT
 ./bin/easy_install $ZCBUILDOUT
 
 echo "Disabling the SSL CERTIFICATION for git"
 git config --global http.sslVerify false
 
-#Copy templates from .core master
+# Copy templates from .core master
 TMP_CHECKOUT="/tmp/eea.plonebuildout.core"
 git clone git@github.com:eea/eea.plonebuildout.core.git $TMP_CHECKOUT
 mkdir -p ./buildout-configs/templates
