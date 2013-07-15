@@ -43,7 +43,7 @@ git config --global http.sslVerify false
 
 # Copy templates from .core master
 TMP_CHECKOUT="/tmp/eea.plonebuildout.core"
-git clone git@github.com:eea/eea.plonebuildout.core.git $TMP_CHECKOUT
+git clone https://github.com/eea/eea.plonebuildout.example.git $TMP_CHECKOUT
 mkdir -p ./buildout-configs/templates
 cp -r $TMP_CHECKOUT/buildout-configs/templates ./buildout-configs/
 rm -rf $TMP_CHECKOUT
