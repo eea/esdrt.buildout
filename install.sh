@@ -48,6 +48,15 @@ mkdir -p ./buildout-configs/templates
 cp -r $TMP_CHECKOUT/buildout-configs/templates ./buildout-configs/
 rm -rf $TMP_CHECKOUT
 
+# fix permissions
+SAVEIFS=$IFS
+IFS=$(echo -en "\n\b")
+for i in `cat afterinstallsh.txt`; do
+ chmod g+rw $i;
+done
+IFS=$SAVEIFS
+
+
 echo ""
 echo "==========================================================="
 echo "All set. Now you can run ./bin/buildout or ./bin/develop rb"
