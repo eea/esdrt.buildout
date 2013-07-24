@@ -29,7 +29,7 @@ if [ -s "bin/activate" ]; then
 fi
 
 echo "Installing virtualenv"
-wget --no-check-certificate "https://raw.github.com/pypa/virtualenv/master/virtualenv.py" -O "/tmp/virtualenv.py"
+wget --no-check-certificate "http://raw.github.com/pypa/virtualenv/1.9.X/virtualenv.py" -O "/tmp/virtualenv.py"
 
 echo "Running: python2.6 /tmp/virtualenv.py --clear ."
 python2.6 "/tmp/virtualenv.py" --clear --distribute  .
