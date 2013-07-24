@@ -52,9 +52,7 @@ rm -rf $TMP_CHECKOUT
 echo "Fixing permissions"
 SAVEIFS=$IFS
 IFS=$(echo -en "\n\b")
-for i in `find ./lib/python2.6`; do
- chmod g+rw $i;
-done
+chmod g+rw -R ./lib/python2.6
 IFS=$SAVEIFS
 
 echo ""
