@@ -48,15 +48,14 @@ mkdir -p ./buildout-configs/templates
 cp -r $TMP_CHECKOUT/buildout-configs/templates ./buildout-configs/
 rm -rf $TMP_CHECKOUT
 
-# fix permissions
+# Fix permissions
+echo "Fixing permissions"
 SAVEIFS=$IFS
 IFS=$(echo -en "\n\b")
-
-for i in `find ./lib/python2.6/site-packages`; do
+for i in `find ./lib/python2.6`; do
  chmod g+rw $i;
 done
 IFS=$SAVEIFS
-
 
 echo ""
 echo "==========================================================="
