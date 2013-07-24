@@ -51,7 +51,8 @@ rm -rf $TMP_CHECKOUT
 # fix permissions
 SAVEIFS=$IFS
 IFS=$(echo -en "\n\b")
-for i in `cat afterinstallsh.txt`; do
+
+for i in `find ./lib/python2.6/site-packages`; do
  chmod g+rw $i;
 done
 IFS=$SAVEIFS
