@@ -1,10 +1,10 @@
 #!/bin/sh
 
-DISTRIBUTE=`grep "distribute\s*\=\s*" versions.cfg | sed 's/ *$//g' | sed 's/=$//g' | sed 's/\s*=\s*/==/g'`
+SETUPTOOLS=`grep "setuptools\s*\=\s*" versions.cfg | sed 's/ *$//g' | sed 's/=$//g' | sed 's/\s*=\s*/==/g'`
 ZCBUILDOUT=`grep "zc\.buildout\s*=\s*" versions.cfg | sed 's/\s*=\s*/==/g'`
 
-if [ -z "$DISTRIBUTE" ]; then
-  DISTRIBUTE="distribute"
+if [ -z "$SETUPTOOLS" ]; then
+  SETUPTOOLS="setuptools"
 fi
 
 if [ -z "$ZCBUILDOUT" ]; then
@@ -12,8 +12,8 @@ if [ -z "$ZCBUILDOUT" ]; then
 fi
 
 if [ -s "bin/activate" ]; then
-  echo "Updating distribute: ./bin/easy_install" $SETUPTOOLS
-  ./bin/easy_install $DISTRIBUTE
+  echo "Updating setuptools: ./bin/easy_install" $SETUPTOOLS
+  ./bin/easy_install $SETUPTOOLS
 
   echo "Updating zc.buildout: ./bin/easy_install" $ZCBUILDOUT
   ./bin/easy_install $ZCBUILDOUT
@@ -32,7 +32,7 @@ echo "Installing virtualenv"
 wget --no-check-certificate "http://raw.github.com/pypa/virtualenv/1.9.X/virtualenv.py" -O "/tmp/virtualenv.py"
 
 echo "Running: python2.6 /tmp/virtualenv.py --clear ."
-python2.6 "/tmp/virtualenv.py" --clear --distribute  .
+python2.6 "/tmp/virtualenv.py" --clear --setuptools  .
 rm /tmp/virtualenv.py*
 
 echo "Installing zc.buildout: $ ./bin/easy_install" $ZCBUILDOUT
