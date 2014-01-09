@@ -26,7 +26,7 @@ Be sure that you have this software and libraries installed on the server
 before you run buildout. These must be globally installed by the server
 administrator.
 
- * python-2.7
+ * python-2.6
  * python-dev (Debian/Ubuntu) / python-devel (RedHat/CentOS)
  * wget
  * lynx
