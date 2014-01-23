@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ====================================================
 Plone 4 buildout for ESD Review Tool
 ====================================================
@@ -188,3 +189,9 @@ Any recent Linux version.
 apache2, memcached, any SMTP local server.
 
 
+=======
+EEA Plone buildout example
+==========================
+
+Read more under https://github.com/eea/eea.plonebuildout.core
+>>>>>>> example/master
