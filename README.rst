@@ -54,9 +54,9 @@ administrator.
  * libbz2-dev (Debian/Ubuntu) / libbzip2-devel (RedHat/CentOS)
  * libmysqlclient18 and libmysqlclient-dev (Debian/Ubuntu) / libmysqlclient and libmysqlclient-devel (RedHat/CentOS)
 
-System requirements and preparation for EEA-CPB
+System requirements and preparation for ESD
 ===============================================
-The EEA-CPB is intended to run on Linux/Unix-based operating systems. The
+The ESD Review Tool is intended to run on Linux/Unix-based operating systems. The
 buildout has been used and tested on *Debian*, *Ubuntu* for development and *CentOS 5* and *CentoOS 6* for production.
 
 The below system libraries must be installed on the server before you run the buildout. These must be globally
