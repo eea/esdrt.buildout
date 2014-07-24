@@ -37,7 +37,7 @@ For the 5th step, at the momment just two developers from CodeSyntax have upload
 
 #. After releasing new packages, buildout needs to be updated to install those new versions. Edit `versions.cfg` file and set the new version of the products. Then commit the changes to the git repository and push the changes to GitHub.
 
-#. Then SSH to the relevant server (in normal conditions you will only need to update the Plone server, so ssh to dog{1,2,3}.eea.europa.eu using the credentials provided by EEA)
+#. Then SSH to the relevant server (in normal conditions you will only need to update the Plone server, so ssh to dog{1,2,3}.eea.europa.eu using the credentials provided by EEA). **NOTE**: during the development and testing stage of the tool, the only server that needs to be updated is dog1.eea.europa.eu. All services at dog2 and dog3 are stopped.
 
 #. Update the buildout with the latest changes::
 
@@ -55,7 +55,6 @@ For the 5th step, at the momment just two developers from CodeSyntax have upload
     $ sudo -u zope ./bin/www2 restart
     $ sudo -u zope ./bin/www3 restart
 
-    **NOTE**: during the development and testing stage of the tool, the only server that needs to be updated is dog1.eea.europa.eu. All services at dog2 and dog3 are stopped.
 
 #. Run upgrade steps (if any): log into Plone, go to the Plone Control Panel and run the needed upgrades.
 
