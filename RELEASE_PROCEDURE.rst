@@ -13,8 +13,8 @@ This document will explain how to create new version of the software and upload 
 
 We have developed 2 add-on products for the ESD Review Tool:
 
- * `esdrt.content`_: content-type, workflow definition, and templates
- * `esdrt.theme`_: styles and Plone template customizations
+* `esdrt.content`_: content-type, workflow definition, and templates
+* `esdrt.theme`_: styles and Plone template customizations
 
 Both products are standard Plone add-on packages and its installation is handled by buildout.
 
