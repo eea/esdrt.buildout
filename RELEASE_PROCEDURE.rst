@@ -20,7 +20,7 @@ Both products are standard Plone add-on packages and its installation is handled
 
 When a new version of the software is prepared, the procedure to follow to update the production servers is as follows:
 
-#. Test all changes on development environments and provide, upgrade steps if needed. Commit all changes into the git repository.
+#. Test all changes on development environments and provide upgrade steps if needed. Commit all changes into the git repository.
 #. Explain roughly the changes in the `docs/CHANGES.txt` file
 #. Create a new tag at the git repository.
 #. Create a release distribution using `python setup.py sdist`
