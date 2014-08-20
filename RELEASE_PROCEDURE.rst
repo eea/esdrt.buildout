@@ -30,7 +30,11 @@ When a new version of the software is prepared, the procedure to follow to updat
 
 The tasks from 2 to 5 can be managed using a dedicated tool like `zest.releaser`_.
 
-For the 5th step, at the momment just two developers from CodeSyntax have upload rights to PyPI, Mikel Larreategi (mlarreategi@codesyntax.com) and Aitzol Naberan (anaberan@codesyntax.com)
+For the 5th step, these are the users that can create the releases on PyPI:
+
+* Mikel Larreategi (mlarreategi@codesyntax.com)
+* Aitzol Naberan (anaberan@codesyntax.com)
+* Mikel Santamaria (msantamaria@bilbomatica.es)
 
 2. Install new version of the software
 =======================================
