@@ -4,22 +4,29 @@ Plone 4 buildout for ESD Review Tool
 
 .. contents ::
 
+ESD Review Tool
+==================
+
+The project name is `Effort Sharing Decission Review Tool` and it's based on
+Zope/Plone framework.
+
 Buildout is a tool for easily creating identical development or production
 environments. This tool gives you the right versions of Zope, Plone products
 and python libraries to ensure that every installation gets exactly the same
 configuration.
 
-Everything is installed in a local folder. This prevents conflicts with
-already existing python and zope packages. Nothing other than this folder
-is touched, so the user doesn't need any special priviliges.
+This application is installed using buildout, and its buildout configuration is based on EEA-CPB [1]_. Everything is installed in a local folder. This prevents conflicts with already existing python and zope packages. Nothing other than this folder is touched, so the user doesn't need any special priviliges.
 
 There are several configurations available for running this buildout:
+
  1. one for developers (development.cfg)
  2. on for the demoserver in BM (demoserver.cfg)
  3. 3 files for production environment (deployment-xxxx.cfg):
+
    1. For webserver (deployment-webserver.cfg at impala.eea.europa.eu)
    2. Zope instances (deployment-zope.cfg at dog{1,2,3}.eea.europa.eu)
    3. Zeo server (deployment-zeo.cfg at bongo.eea.europa.eu)
+
 
 Prerequisites - What needs to be installed by sys admin
 -------------------------------------------------------
@@ -115,8 +122,8 @@ Run buildout for development
 The first time you want to use this buildout you first have to get
 all software from github and then run a few commands::
 
-   $ git clone git@github.com:eea/esdrt.plonebuildout.git
-   $ cd esdrt.plonebuildout
+   $ git clone git@github.com:eea/esdrt.buildout.git
+   $ cd esdrt.buildout
    $ ./install.sh -c development.cfg
    $ ./bin/buildout -c development.cfg
 
@@ -124,7 +131,7 @@ This first three steps only have to be done the first time you use this
 buildout. When you later want to update the site because people have committed
 changes you do::
 
-   $ cd esdrt.plonebuildout
+   $ cd esdrt.buildout
    $ git pull origin master
    $ ./bin/develop rb
 
@@ -147,31 +154,29 @@ pass the configuration argument for deployment of the current machine.
 
 For the webserver::
 
-   $ git clone git@github.com:eea/esdrt.plonebuildout.git
-   $ cd esdrt.plonebuildout
+   $ git clone git@github.com:eea/esdrt.buildout.git
+   $ cd esdrt.buildout
    $ ./install.sh -c deployment-webserver.cfg
    $ ./bin/buildout -c deployment.webserver.cfg
 
-For the webserver::
-
-   $ git clone git@github.com:eea/esdrt.plonebuildout.git
-   $ cd esdrt.plonebuildout
-   $ ./install.sh -c deployment-webserver.cfg
-   $ ./bin/buildout -c deployment.webserver.cfg
 
 For each zope instance machine::
 
-   $ git clone git@github.com:eea/esdrt.plonebuildout.git
-   $ cd esdrt.plonebuildout
+   $ git clone git@github.com:eea/esdrt.buildout.git
+   $ cd esdrt.buildout
    $ ./install.sh -c deployment-zope.cfg
    $ ./bin/buildout -c deployment.zope.cfg
 
 For the zeoserver::
 
-   $ git clone git@github.com:eea/esdrt.plonebuildout.git
-   $ cd esdrt.plonebuildout
+   $ git clone git@github.com:eea/esdrt.buildout.git
+   $ cd esdrt.buildout
    $ ./install.sh -c deployment-zeo.cfg
    $ ./bin/buildout -c deployment.zeo.cfg
+
+On all those servers, the first time you install this buildout, you need to run the following command to set the file and folder permissions correctly [2]_::
+
+   $ chmod -R g+rw
 
 
 The apache config is generated only in the webserver configuration
@@ -183,22 +188,35 @@ and other zope/plone products that are not used during web development.
 The deployment buildout is based on the ZEO client and server. It installs
 several zope instances, one zeo server and one debug instance.
 
+Running the application on production
+-----------------------------------------
+
 To run the debug instance use::
 
    $ ./bin/instance fg
 
+Processes on production should be started with sudo, e.g::
+
+   $ sudo ./bin/memcached start
+   $ sudo ./bin/zeoserver start
+   $ sudo ./bin/www1 start
+   $ ...
+   $ sudo ./bin/www8 start
+   $ sudo ./bin/poundctl start
+
+For the application stack to be restarted when server reboot, the system administrator should add under /etc/init.d the script from esdrt.buildout/etc/rc.d/restart-portal, e.g.::
+
+   $ cd /var/local/esd/esdrt.buildout/etc/rc.d
+   $ ln -s `pwd`/restart-portal /etc/init.d/restart-portal
+   $ chkconfig --add restart-portal
+   $ chkconfig restart-portal on
+   $ service restart-portal start
+
 
 Cron jobs to be setup on production and development
----------------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-On production::
-
-   $ crontab -e -u zope
-   @reboot cd /var/local/esd/esdrt.plonebuildout && bin/zope-start
-
-
-Database packing
-------------------
+Database packing::
 
 
 Packing is a vital regular maintenance procedure The Plone database
@@ -207,14 +225,9 @@ pack the database to reclaim space.
 
 Data.fs should be packed daily via a cron job::
 
-   01 2 * * * /var/local/esd/esdrt.plonebuildout/bin/zeopack
+   01 2 * * * /var/local/esd/esdrt.buildout/bin/zeopack
 
 
-EEA deployment
---------------
-
-The project name is `Effort Sharing Decission Review Tool` and it's based on
-Zope/Plone framework.
 
 Contacts
 ========
@@ -224,6 +237,7 @@ The project owners are:
  * Eduardas Kazakevicius DG CLIMA
  * Melanie Sporer EEA
  * Marie Jaegly EEA
+ * Franz Daffner EEA
 
 Other people involved in this project are:
 
@@ -242,7 +256,7 @@ Source code
 
 You can get the code for this project from:
 
- * https://github.com/eea/esdrt.plonebuildout (buildout)
+ * https://github.com/eea/esdrt.buildout (buildout)
  * https://github.com/eea/esdrt.theme (theme)
  * https://github.com/eea/esdrt.content (content-types and workflow)
 
@@ -250,7 +264,7 @@ Resources
 =========
 
 Hardware
-~~~~~~~~
+------------
 
 Minimum requirements:
  * 2048MB RAM
@@ -264,9 +278,10 @@ Recommended:
 
 
 Software
-~~~~~~~~
+-------------
 
 Any recent Linux version.
 apache2, memcached, any SMTP local server.
 
-
+.. [1] EEA-CPB, common buildout for EEA deployments: https://github.com/eea/eea.plonebuildout.core
+.. [2] Check EEA-CPB documentation for more information https://github.com/eea/eea.plonebuildout.core#step-3-eea-cpb-for-production
