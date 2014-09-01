@@ -235,9 +235,9 @@ Contacts
 The project owners are:
 
  * Eduardas Kazakevicius DG CLIMA
- * Melanie Sporer EEA
- * Marie Jaegly EEA
- * Franz Daffner EEA
+ * Melanie Sporer EEA (Melanie.Sporer at eea.europa.eu)
+ * Marie Jaegly EEA (Marie.Jaegly at eea.europa.eu)
+ * Franz Daffner EEA (Franz.Daffner at eea.europa.eu)
 
 Other people involved in this project are:
 
