@@ -15,6 +15,7 @@
     RewriteRule ^/(.*) http://localhost:${configuration:pound-port}/VirtualHostBase/https/${configuration:www-domain}:443/${configuration:plone-site}/VirtualHostRoot/$1 [P,L]
     Include ${configuration:custom-vh-config}
 
+    SSLEngine on
     SSLCertificateFile /etc/pki/tls/certs/eea-rapidssl-starcert.pem
     SSLCertificateKeyFile /etc/pki/tls/private/eea-rapidssl-starcert-nopwd.key
     SSLCertificateChainFile /etc/pki/tls/certs/eea-rapidssl-starcert-intermediateCA.pem
