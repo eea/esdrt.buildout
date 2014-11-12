@@ -12,7 +12,7 @@
 
     RewriteEngine On
 
-    RewriteRule ^/(.*) http://localhost:${configuration:pound-port}/VirtualHostBase/http/${configuration:www-domain}:80/${configuration:plone-site}/VirtualHostRoot/$1 [P,L]
+    RewriteRule ^/(.*) http://localhost:${configuration:pound-port}/VirtualHostBase/https/${configuration:www-domain}:443/${configuration:plone-site}/VirtualHostRoot/$1 [P,L]
     Include ${configuration:custom-vh-config}
 
     SSLCertificateFile /etc/pki/tls/certs/eea-rapidssl-starcert.pem
