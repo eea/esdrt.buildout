@@ -176,7 +176,12 @@ For the zeoserver::
 
 On all those servers, the first time you install this buildout, you need to run the following command to set the file and folder permissions correctly [2]_::
 
-   $ chmod -R g+rw
+   $ chmod -R g+rw .
+
+You also have to add +x permissions for the group on var/blobstorage-cache folder::
+
+   $ chmod -R g+x var/blobstorage-cache
+
 
 
 The apache config is generated only in the webserver configuration
