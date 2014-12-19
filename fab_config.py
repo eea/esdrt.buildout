@@ -4,7 +4,6 @@ Fabric settings for hosts.
 
 from fabric.api import env
 
-
 def plone():
     """
     Settings for the plone server.
@@ -60,6 +59,10 @@ def webserver():
     env.directory = '/var/local/esd/esdrt.buildout'
 
 
+def impala():
+    webserver()
+
+
 def zeo():
     """
     Settings for the zeo.
@@ -78,3 +81,7 @@ def zeo():
 
     # The root of your Plone instance.
     env.directory = '/var/local/esd/esdrt.buildout'
+
+
+def bongo():
+    zeo()

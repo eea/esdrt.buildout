@@ -18,24 +18,32 @@ def test():
         run('echo "test"')
 
 
-def _with_deploy_env(commands=[]):
+def _with_deploy_env(commands=[], use_sudo=True):
     """
     Run a set of commands as the deploy user in the deploy directory.
     """
     with cd(env.directory):
         for command in commands:
-            sudo(command, user=env.deploy_user)
+            if use_sudo:
+                sudo(command, user=env.deploy_user)
+            else:
+                run(command)
 
 
 def touch():
     _with_deploy_env(['touch mikel2.txt'])
 
 
+def tail():
+    _with_deploy_env(['tail -f var/log/www1.log'], use_sudo=False)
+
+
 def pull():
     """
     Do a git pull.
     """
-    _with_deploy_env(['git pull origin master'])
+    env.forward_agent = True
+    _with_deploy_env(['git pull origin master'], use_sudo=False)
 
 
 def stop():
@@ -78,7 +86,7 @@ def buildout():
     """
     Rerun buildout.
     """
-    _with_deploy_env(['./bin/buildout -c %s.cfg -vv' % env.buildout_config])
+    _with_deploy_env(['./bin/buildout -c %s -vv' % env.buildout_config])
 
 
 def deploy():
