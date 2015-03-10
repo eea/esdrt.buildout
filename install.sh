@@ -1,49 +1,32 @@
 #!/bin/bash
+
 set -e
 #set -x
+FINDLINKS='http://eggrepo.eea.europa.eu/simple'
+INDEX='http://pypi.python.org/simple'
 
-CONFIG=$1
-SETUPTOOLS=`curl -s https://raw.githubusercontent.com/eea/eea.plonebuildout.core/master/buildout-configs/versions.cfg | grep "setuptools\s*\=\s*" | sed 's/ *//g' | sed 's/=//g' | sed 's/[a-z]//g'`
-ZCBUILDOUT=`curl -s https://raw.githubusercontent.com/eea/eea.plonebuildout.core/master/buildout-configs/versions.cfg | grep "zc\.buildout\s*=\s*" | sed 's/^.*\=\s*//g'`
-BOOSTRAP='https://raw.githubusercontent.com/eea/eea.plonebuildout.core/master/bootstrap.py'
-
-if [ -z "$CONFIG" ]; then
-  if [ -s "development.cfg" ]; then
-    CONFIG="development.cfg"
-  else
-    CONFIG="buildout.cfg"
-  fi
-fi
-
-echo ""
-echo "Using $CONFIG"
-echo ""
+SETUPTOOLS=`curl -s https://raw.githubusercontent.com/eea/eea.plonebuildout.core/master/buildout-configs/versions.cfg | grep "setuptools\s*\=\s*" | sed 's/ *$//g' | sed 's/=$//g' | sed 's/\s*=\s*/==/g'`
+ZCBUILDOUT=`curl -s https://raw.githubusercontent.com/eea/eea.plonebuildout.core/master/buildout-configs/versions.cfg | grep "zc\.buildout\s*=\s*" | sed 's/\s*=\s*/==/g'`
 
 if [ -z "$SETUPTOOLS" ]; then
-  SETUPTOOLS="7.0"
+  SETUPTOOLS="setuptools"
 fi
-
-echo "Using setuptools $SETUPTOOLS"
-echo ""
 
 if [ -z "$ZCBUILDOUT" ]; then
-  ZCBUILDOUT="2.2.1"
+  ZCBUILDOUT="zc.buildout"
 fi
-
-echo "Using zc.buildout $ZCBUILDOUT"
-echo ""
 
 if [ -z "$PYTHON" ]; then
-  PYTHON="/usr/bin/env python2.7"
+  PYTHON="/usr/bin/env python2.6"
 fi
 
-# Make sure python is 2.7 or later
+# Make sure python is 2.6 or later
 PYTHON_OK=`$PYTHON -c 'import sys
-print (sys.version_info >= (2, 7) and "1" or "0")'`
+print (sys.version_info >= (2, 6) and "1" or "0")'`
 
 if [ "$PYTHON_OK" = '0' ]; then
-    echo "Python 2.7 or later is required"
-    echo "EXAMPLE: PYTHON=/path/to/python2.7 ./install.sh"
+    echo "Python 2.6 or later is required"
+    echo "EXAMPLE: PYTHON=/path/to/python-2.6 ./install.sh"
     exit 0
 fi
 
@@ -53,39 +36,57 @@ echo `$PYTHON --version`
 echo "Adding eggs directory"
 mkdir -p eggs
 
-if [ -s "bin/activate" ]; then
+if [ -s "bin/activate" -a -s "bin/easy_install" ]; then
+  echo "Updating setuptools: ./bin/easy_install -i $INDEX -f $FINDLINKS -U $SETUPTOOLS"
+  ./bin/easy_install -i $INDEX -f $FINDLINKS -U $SETUPTOOLS
+
+  echo "Updating zc.buildout: ./bin/easy_install -i $INDEX -f $FINDLINKS -U $ZCBUILDOUT"
+  ./bin/easy_install -i $INDEX -f $FINDLINKS -U $ZCBUILDOUT
 
   echo ""
-  echo "Already a virtualenv environment."
-  echo "Please remove bin/activate if you want to reinitiate it."
+  echo "============================================================="
+  echo "Buildout is already installed."
+  echo "Please remove bin/activate if you want to re-run this script."
+  echo "============================================================="
   echo ""
 
-else
-
-  echo "Installing virtualenv"
-  # NOTE: virtualenv now doesn't download anything by default, so we need to provide setuptools
-  curl -o "setuptools-$SETUPTOOLS.tar.gz" -k "https://pypi.python.org/packages/source/s/setuptools/setuptools-$SETUPTOOLS.tar.gz"
-  curl -o "/tmp/virtualenv.py" -k "https://raw.githubusercontent.com/eea/virtualenv/1.10.X/virtualenv.py"
-
-  echo "Running: $PYTHON /tmp/virtualenv.py --clear ."
-  $PYTHON "/tmp/virtualenv.py" --clear .
-  rm /tmp/virtualenv.py*
-  rm "setuptools-$SETUPTOOLS.tar.gz"
-
+  exit 0
 fi
 
-if [ ! -s "bootstrap.py" ]; then
-  curl -o "bootstrap.py" -k $BOOSTRAP
-fi
+echo "Installing virtualenv"
+# NOTE: virtualenv now doesn't download anything by default, so we need to provide setuptools
+curl -o "setuptools-0.9.8.tar.gz" -k "https://pypi.python.org/packages/source/s/setuptools/setuptools-0.9.8.tar.gz#md5=243076241781935f7fcad370195a4291"
+curl -o "/tmp/virtualenv.py" -k "https://raw.githubusercontent.com/eea/virtualenv/1.10.X/virtualenv.py"
 
-echo "Running bin/python bootstrap.py -c $CONFIG -v $ZCBUILDOUT --setuptools-version=$SETUPTOOLS"
-bin/python "bootstrap.py" -c $CONFIG -v $ZCBUILDOUT --setuptools-version=$SETUPTOOLS
+echo "Running: $PYTHON /tmp/virtualenv.py --clear ."
+$PYTHON "/tmp/virtualenv.py" --clear .
+rm /tmp/virtualenv.py*
+
+echo "Updating setuptools: ./bin/easy_install -i $INDEX -f FINDLINKS -U $SETUPTOOLS"
+./bin/easy_install -i $INDEX -f $FINDLINKS -U $SETUPTOOLS
+
+echo "Installing zc.buildout: $ ./bin/easy_install -i $INDEX -f $FINDLINKS -U $ZCBUILDOUT"
+./bin/easy_install -i $INDEX -f $FINDLINKS -U $ZCBUILDOUT
 
 echo "Disabling the SSL CERTIFICATION for git"
 git config --global http.sslVerify false
 
+# Copy templates from .core master
+TMP_CHECKOUT="/tmp/eea.plonebuildout.core"
+git clone https://github.com/eea/eea.plonebuildout.core.git $TMP_CHECKOUT
+mkdir -p ./buildout-configs/templates
+cp -r $TMP_CHECKOUT/buildout-configs/templates ./buildout-configs/
+rm -rf $TMP_CHECKOUT
+
+# Fix permissions
+echo "Fixing permissions"
+SAVEIFS=$IFS
+IFS=$(echo -en "\n\b")
+chmod g+rw -R ./lib/python2.*
+IFS=$SAVEIFS
+
 echo ""
-echo "========================================================================="
-echo "All set. Now you can run ./bin/buildout -c $CONFIG"
-echo "========================================================================="
+echo "==========================================================="
+echo "All set. Now you can run ./bin/buildout or ./bin/develop rb"
+echo "==========================================================="
 echo ""
