@@ -4,6 +4,7 @@ Fabric settings for hosts.
 
 from fabric.api import env
 
+
 def plone():
     """
     Settings for the plone server.
@@ -22,6 +23,12 @@ def plone():
 
     # The root of your Plone instance.
     env.directory = '/var/local/esd/esdrt.buildout'
+
+
+def staging():
+    plone()
+    env.hosts = ['larreategi@dogsdev.eea.europa.eu']
+    env.buildout_config = 'staging.cfg'
 
 
 def dog1():
