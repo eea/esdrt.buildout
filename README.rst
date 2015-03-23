@@ -123,6 +123,17 @@ To debug::
 
    $ ./bin/instance debug
 
+
+Preliminary work regarding the use of python2.7 as a Software Collection
+-------------------------------------------------------------------------
+
+The server setup uses `Software Collections`_ to install different versions of python. So to use python2.7 to run this buildout, you need first to enter a bash session which has python2.7 software collection enabled. To do so, run first this command::
+
+    $ sudo -u zope scl enable python27 bash
+
+From this moment on, the python2.7 will be available on the command-line and you will be logged-in as 'zope' user.
+
+
 Run buildout for production (deployment)
 ----------------------------------------
 
@@ -159,9 +170,10 @@ Next time the buildout needs to be run (when updates need to be installed), you 
    $ cd /var/local/esd/esdrt.buildout
    $ git fetch origin
    $ git merge origin/master
-   $ sudo -u zope ./bin/buildout -c deployment-webserver.cfg -vv
-   $ sudo -u zope ./bin/buildout -c deployment-zope.cfg -vv
-   $ sudo -u zope ./bin/buildout -c deployment-zeo.cfg -vv
+   $ sudo -u zope scl enable python27 bash
+   $ ./bin/buildout -c deployment-webserver.cfg -vv
+   $ ./bin/buildout -c deployment-zope.cfg -vv
+   $ ./bin/buildout -c deployment-zeo.cfg -vv
 
 The apache config is generated only in the webserver configuration
 at /var/local/esd/etc/apache-vh.conf
