@@ -50,21 +50,21 @@ def stop():
     """
     Shutdown the instance and zeo.
     """
-    _with_deploy_env(['./bin/www1 stop', './bin/www2 stop', './bin/www3 stop'])
+    _with_deploy_env(['./bin/www1 stop', './bin/www2 stop'])
 
 
 def start():
     """
     Start up the instance and zeo.
     """
-    _with_deploy_env(['./bin/www1 start', './bin/www2 start', './bin/www3 start'])
+    _with_deploy_env(['./bin/www1 start', './bin/www2 start'])
 
 
 def restart():
     """
     Restart just the zope instance, not the zeo.
     """
-    _with_deploy_env(['./bin/www1 restart', './bin/www2 restart', './bin/www3 restart'])
+    _with_deploy_env(['./bin/www1 restart', './bin/www2 restart'])
 
 
 def status():
@@ -78,7 +78,6 @@ def status():
     # Deploy and running status
     _with_deploy_env(['./bin/www1 status',
                       './bin/www2 status',
-                      './bin/www3 status',
                       'git log -1'])
 
 
