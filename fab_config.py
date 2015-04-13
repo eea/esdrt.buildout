@@ -46,6 +46,25 @@ def dog3():
     env.hosts = ['larreategi@dog3.eea.europa.eu']
 
 
+def dog4():
+    plone()
+    env.hosts = [
+        'larreategi@10.50.4.34',
+    ]
+
+
+def dogs():
+    plone()
+    env.hosts = [
+        'larreategi@10.50.4.34',
+        'larreategi@10.50.4.35',
+        'larreategi@10.50.4.36',
+        'larreategi@10.50.4.37',
+        'larreategi@10.50.4.38',
+        'larreategi@10.50.4.39',
+    ]
+
+
 def webserver():
     """
     Settings for the webserver.
