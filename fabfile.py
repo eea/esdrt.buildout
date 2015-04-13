@@ -12,12 +12,6 @@ except:
     pass
 
 
-def test():
-    plone()
-    with cd(env.directory):
-        run('echo "test"')
-
-
 def _with_deploy_env(commands=[], use_sudo=True):
     """
     Run a set of commands as the deploy user in the deploy directory.
@@ -28,10 +22,6 @@ def _with_deploy_env(commands=[], use_sudo=True):
                 sudo(command, user=env.deploy_user)
             else:
                 run(command)
-
-
-def touch():
-    _with_deploy_env(['touch mikel2.txt'])
 
 
 def tail():
@@ -50,21 +40,30 @@ def stop():
     """
     Shutdown the instance and zeo.
     """
-    _with_deploy_env(['./bin/www1 stop', './bin/www2 stop'])
+    command1 = 'scl enable python27 "/var/local/esd/esdrt.buildout/bin/www1 stop"'
+    command2 = 'scl enable python27 "/var/local/esd/esdrt.buildout/bin/www2 stop"'
+    sudo(command1, user=env.deploy_user)
+    sudo(command2, user=env.deploy_user)
 
 
 def start():
     """
     Start up the instance and zeo.
     """
-    _with_deploy_env(['./bin/www1 start', './bin/www2 start'])
+    command1 = 'scl enable python27 "/var/local/esd/esdrt.buildout/bin/www1 start"'
+    command2 = 'scl enable python27 "/var/local/esd/esdrt.buildout/bin/www2 start"'
+    sudo(command1, user=env.deploy_user)
+    sudo(command2, user=env.deploy_user)
 
 
 def restart():
     """
     Restart just the zope instance, not the zeo.
     """
-    _with_deploy_env(['./bin/www1 restart', './bin/www2 restart'])
+    command1 = 'scl enable python27 "/var/local/esd/esdrt.buildout/bin/www1 restart"'
+    command2 = 'scl enable python27 "/var/local/esd/esdrt.buildout/bin/www2 restart"'
+    sudo(command1, user=env.deploy_user)
+    sudo(command2, user=env.deploy_user)
 
 
 def status():
@@ -85,7 +84,8 @@ def buildout():
     """
     Rerun buildout.
     """
-    _with_deploy_env(['./bin/buildout -c %s -vv' % env.buildout_config])
+    command = 'scl enable python27 "/var/local/esd/esdrt.buildout/bin/buildout -c %s -vv"' % env.buildout_config
+    sudo(command, user=env.deploy_user)
 
 
 def deploy():
