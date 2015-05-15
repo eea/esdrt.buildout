@@ -73,23 +73,23 @@ Some fabric_ scripts are provided to ease the deployment on EEA servers. To achi
 
     $ fab dog4 deploy -u username -p password
 
-Use the username and password provided by EEA Sysadmins to log-in on the servers.
+   Use the username and password provided by EEA Sysadmins to log-in on the servers.
 
 #. Check that the deploy was OK. This will show the last lines of the instance.log file and check that the service is running::
 
     $ fab dog4 tail -u username -p password
 
-Look for a line like this one::
+   Look for a line like this one::
 
     out: 2015-02-15T10:00:50 INFO Zope Ready to handle requests
 
-Exit pressing Ctrl-C.
+   Exit pressing Ctrl-C.
 
 #. If the deployment on dog4 was OK, deploy the update on the other servers::
 
     $ fab all_except_dog4 deploy -u username -p password -P
 
-The last -P option will force fabric to run the deployment in parallel in all servers.
+   The last -P option will force fabric to run the deployment in parallel in all servers.
 
 
 
