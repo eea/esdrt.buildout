@@ -15,7 +15,7 @@ def plone():
 
     # A list of hostnames to deploy on. The following will try to connect to
 
-    env.gateway = 'larreategi@silverfish.eea.europa.eu'
+    env.gateway = 'silverfish.eea.europa.eu'
     env.hosts = []
 
     # The deploy user. Most deploy commands will be run as this user.
@@ -27,41 +27,87 @@ def plone():
 
 def staging():
     plone()
-    env.hosts = ['larreategi@dogsdev.eea.europa.eu']
+    env.hosts = ['dogsdev.eea.europa.eu']
     env.buildout_config = 'staging.cfg'
 
 
 def dog1():
     plone()
-    env.hosts = ['larreategi@dog1.eea.europa.eu']
+    env.hosts = ['dog1.eea.europa.eu']
 
 
 def dog2():
     plone()
-    env.hosts = ['larreategi@dog2.eea.europa.eu']
+    env.hosts = ['dog2.eea.europa.eu']
 
 
 def dog3():
     plone()
-    env.hosts = ['larreategi@dog3.eea.europa.eu']
+    env.hosts = ['dog3.eea.europa.eu']
 
 
 def dog4():
     plone()
     env.hosts = [
-        'larreategi@10.50.4.34',
+        '10.50.4.34',
+    ]
+
+
+def dog5():
+    plone()
+    env.hosts = [
+        '10.50.4.35',
+    ]
+
+
+def dog6():
+    plone()
+    env.hosts = [
+        '10.50.4.36',
+    ]
+
+
+def dog7():
+    plone()
+    env.hosts = [
+        '10.50.4.37',
+    ]
+
+
+def dog8():
+    plone()
+    env.hosts = [
+        '10.50.4.38',
+    ]
+
+
+def dog9():
+    plone()
+    env.hosts = [
+        '10.50.4.39',
     ]
 
 
 def dogs():
     plone()
     env.hosts = [
-        'larreategi@10.50.4.34',
-        'larreategi@10.50.4.35',
-        'larreategi@10.50.4.36',
-        'larreategi@10.50.4.37',
-        'larreategi@10.50.4.38',
-        'larreategi@10.50.4.39',
+        '10.50.4.34',
+        '10.50.4.35',
+        '10.50.4.36',
+        '10.50.4.37',
+        '10.50.4.38',
+        '10.50.4.39',
+    ]
+
+
+def all_except_dog4():
+    plone()
+    env.hosts = [
+        '10.50.4.35',
+        '10.50.4.36',
+        '10.50.4.37',
+        '10.50.4.38',
+        '10.50.4.39',
     ]
 
 
@@ -75,8 +121,8 @@ def webserver():
 
     # A list of hostnames to deploy on. The following will try to connect to
     # myqaserver.mysite.com as your username:
-    env.gateway = 'larreategi@silverfish.eea.europa.eu'
-    env.hosts = ['larreategi@impala.eea.europa.eu']
+    env.gateway = 'silverfish.eea.europa.eu'
+    env.hosts = ['impala.eea.europa.eu']
 
     # The deploy user. Most deploy commands will be run as this user.
     env.deploy_user = 'zope'
@@ -99,8 +145,8 @@ def zeo():
 
     # A list of hostnames to deploy on. The following will try to connect to
     # myqaserver.mysite.com as your username:
-    env.gateway = 'larreategi@silverfish.eea.europa.eu'
-    env.hosts = ['larreategi@bongo.eea.europa.eu']
+    env.gateway = 'silverfish.eea.europa.eu'
+    env.hosts = ['bongo.eea.europa.eu']
 
     # The deploy user. Most deploy commands will be run as this user.
     env.deploy_user = 'zope'

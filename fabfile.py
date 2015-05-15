@@ -40,8 +40,8 @@ def stop():
     """
     Shutdown the instance and zeo.
     """
-    command1 = 'scl enable python27 "/var/local/esd/esdrt.buildout/bin/www1 stop"'
-    command2 = 'scl enable python27 "/var/local/esd/esdrt.buildout/bin/www2 stop"'
+    command1 = 'scl enable python27 "{}/bin/www1 stop"'.format(env.directory)
+    command2 = 'scl enable python27 "{}/bin/www2 stop"'.format(env.directory)
     sudo(command1, user=env.deploy_user)
     sudo(command2, user=env.deploy_user)
 
@@ -50,8 +50,8 @@ def start():
     """
     Start up the instance and zeo.
     """
-    command1 = 'scl enable python27 "/var/local/esd/esdrt.buildout/bin/www1 start"'
-    command2 = 'scl enable python27 "/var/local/esd/esdrt.buildout/bin/www2 start"'
+    command1 = 'scl enable python27 "{}/bin/www1 start"'.format(env.directory)
+    command2 = 'scl enable python27 "{}/bin/www2 start"'.format(env.directory)
     sudo(command1, user=env.deploy_user)
     sudo(command2, user=env.deploy_user)
 
@@ -60,8 +60,10 @@ def restart():
     """
     Restart just the zope instance, not the zeo.
     """
-    command1 = 'scl enable python27 "/var/local/esd/esdrt.buildout/bin/www1 restart"'
-    command2 = 'scl enable python27 "/var/local/esd/esdrt.buildout/bin/www2 restart"'
+    command1 = 'scl enable python27 "{}/bin/www1 restart"'.format(
+        env.directory)
+    command2 = 'scl enable python27 "{}/bin/www2 restart"'.format(
+        env.directory)
     sudo(command1, user=env.deploy_user)
     sudo(command2, user=env.deploy_user)
 
@@ -84,7 +86,8 @@ def buildout():
     """
     Rerun buildout.
     """
-    command = 'scl enable python27 "/var/local/esd/esdrt.buildout/bin/buildout -c %s -vv"' % env.buildout_config
+    command = 'scl enable python27 "{0}/bin/buildout -c {0}/{1} -vv"'.format(
+        env.directory, env.buildout_config)
     sudo(command, user=env.deploy_user)
 
 
