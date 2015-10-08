@@ -79,6 +79,7 @@ libcurl3-dev                curl-devel                   sparql-client and pycur
 libmemcached                libmemcached                 memcached
 libmemcached-dev>=0.40      libmemcached-devel>=0.40     memcached
 zlib1g-dev                  zlib-devel                   memcached
+libpq-dev                   postgresql94-devel           buildout/relstorage
 ==========================  ===========================  =========================================
 
 Additional info to install git for CentOS::
