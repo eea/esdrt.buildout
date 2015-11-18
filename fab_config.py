@@ -31,19 +31,19 @@ def staging():
     env.buildout_config = 'staging.cfg'
 
 
-def dog1():
-    plone()
-    env.hosts = ['dog1.eea.europa.eu']
+# def dog1():
+#     plone()
+#     env.hosts = ['dog1.eea.europa.eu']
 
 
-def dog2():
-    plone()
-    env.hosts = ['dog2.eea.europa.eu']
+# def dog2():
+#     plone()
+#     env.hosts = ['dog2.eea.europa.eu']
 
 
-def dog3():
-    plone()
-    env.hosts = ['dog3.eea.europa.eu']
+# def dog3():
+#     plone()
+#     env.hosts = ['dog3.eea.europa.eu']
 
 
 def dog4():
@@ -97,6 +97,10 @@ def dogs():
         '10.50.4.37',
         '10.50.4.38',
         '10.50.4.39',
+        '10.50.4.43',
+        '10.50.4.44',
+        '10.50.4.45',
+        '10.50.4.46',
     ]
 
 
@@ -108,6 +112,10 @@ def all_except_dog4():
         '10.50.4.37',
         '10.50.4.38',
         '10.50.4.39',
+        '10.50.4.43',
+        '10.50.4.44',
+        '10.50.4.45',
+        '10.50.4.46',
     ]
 
 
