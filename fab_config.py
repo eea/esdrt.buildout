@@ -88,6 +88,34 @@ def dog9():
     ]
 
 
+def dog10():
+    plone()
+    env.hosts = [
+        '10.50.4.43',
+    ]
+
+
+def dog11():
+    plone()
+    env.hosts = [
+        '10.50.4.44',
+    ]
+
+
+def dog12():
+    plone()
+    env.hosts = [
+        '10.50.4.45',
+    ]
+
+
+def dog13():
+    plone()
+    env.hosts = [
+        '10.50.4.46',
+    ]
+
+
 def dogs():
     plone()
     env.hosts = [
