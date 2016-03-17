@@ -21,11 +21,11 @@ Both products are standard Plone add-on packages and its installation is handled
 When a new version of the software is prepared, the procedure to follow to update the production servers is as follows:
 
 #. Test all changes on development environments and provide upgrade steps if needed. Commit all changes into the git repository.
-#. Explain roughly the changes in the `docs/CHANGES.txt` file
+#. Explain roughly the changes in the `docs/HISTORY.txt` file
 #. Create a new tag at the git repository.
 #. Create a release distribution using `python setup.py sdist`
 #. Upload the release distribution to PyPI_
-#. Update the version number at `setup.py` and `docs/CHANGES.txt`
+#. Update the version number at `setup.py` and `docs/HISTORY.txt`
 #. Commit the changes into the git repository.
 
 The tasks from 2 to 5 can be managed using a dedicated tool like `zest.releaser`_.
@@ -35,6 +35,8 @@ For the 5th step, these are the users that can create the releases on PyPI:
 * Mikel Larreategi (mlarreategi@codesyntax.com)
 * Aitzol Naberan (anaberan@codesyntax.com)
 * Mikel Santamaria (msantamaria@bilbomatica.es)
+* Cornel Nițu (cornel.nitu@eaudeweb.ro)
+* David Bătrânu (david.batranu@eaudeweb.ro)
 
 2. Install the new version of the software
 ==========================================
