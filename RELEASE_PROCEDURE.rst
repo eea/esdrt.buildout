@@ -51,6 +51,13 @@ For the 5th step, these are the users that can create the releases on PyPI:
     $ git fetch origin
     $ git merge origin/master
 
+then, only first time:
+
+    $ cp secret.cfg.sample secret.cfg
+    $ vim secret.cfg
+
+Edit secret.cfg and change all the passwords. This file should not be added to Git because it is secret :).
+
 #. Re-run buildout::
 
     $ sudo -u zope scl enable python27 bash
@@ -70,6 +77,12 @@ For the 5th step, these are the users that can create the releases on PyPI:
 =======================================================
 
 Some fabric_ scripts are provided to ease the deployment on EEA servers. To achieve that you will need to have fabric_ installed or buildout run with fab.cfg or development.cfg files.
+
+#. Create an env.ini based on sample. Edit the file and add the servers IPs. This file should not be added to Git:
+
+    $ cd fabfile
+    $ cp env.ini.sample env.ini
+    $ vi env.ini
 
 #. Do the deployment in just one server (dog4)::
 
