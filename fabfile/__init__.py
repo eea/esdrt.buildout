@@ -25,7 +25,8 @@ def _with_deploy_env(commands=[], use_sudo=True):
 
 
 def tail():
-    _with_deploy_env(['tail -f var/log/www1.log'], use_sudo=False)
+    command = 'tail -f /var/log/messages | grep -e www1 -e www2'
+    sudo(command)
 
 
 def pull():
