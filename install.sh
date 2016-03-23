@@ -53,6 +53,9 @@ echo `$PYTHON --version`
 echo "Adding eggs directory"
 mkdir -p eggs
 
+echo "Adding download cache directory"
+mkdir -p downloads
+
 if [ -s "bin/activate" ]; then
 
   echo ""
