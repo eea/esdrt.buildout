@@ -105,7 +105,7 @@ all software from github and then run a few commands::
 
    $ git clone git@github.com:eea/esdrt.buildout.git
    $ cd esdrt.buildout
-   $ ./install.sh -c development.cfg
+   $ ./install.sh development.cfg
    $ ./bin/buildout -c development.cfg
 
 This first three steps only have to be done the first time you use this
