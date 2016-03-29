@@ -77,3 +77,9 @@ setuptools-0.9.8.tar.gz
 src/
 updates.sh
 updates.sh.tmp
+
+# Mac OS X metadata
+.DS_Store
+
+#PyCharm settings
+.idea/
