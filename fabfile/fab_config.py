@@ -23,7 +23,6 @@ def plone():
 
 
 def staging():
-    plone()
     enviroment('staging')
 
 
