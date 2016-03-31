@@ -78,8 +78,8 @@ def status():
     run('uptime')
 
     # Deploy and running status
-    _with_deploy_env(['./bin/www1 status',
-                      './bin/www2 status',
+    _with_deploy_env(['scl enable python27 "./bin/www1 status"',
+                      'scl enable python27 "./bin/www2 status"',
                       'git log -1'])
 
 
