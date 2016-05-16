@@ -83,3 +83,6 @@ updates.sh.tmp
 
 #PyCharm settings
 .idea/
+
+#New Relic ini file
+newrelic.ini

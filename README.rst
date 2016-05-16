@@ -80,6 +80,7 @@ libmemcached                libmemcached                 memcached
 libmemcached-dev>=0.40      libmemcached-devel>=0.40     memcached
 zlib1g-dev                  zlib-devel                   memcached
 libpq-dev                   postgresql94-devel           buildout/relstorage
+python-test                 python27-python-test         jarn.checkinterval
 ==========================  ===========================  =========================================
 
 Additional info to install git for CentOS::
@@ -87,6 +88,12 @@ Additional info to install git for CentOS::
 $ wget http://puias.math.ias.edu/data/puias/computational/6/x86_64/git-1.8.3.1-1.sdl6.x86_64.rpm
 $ wget http://puias.math.ias.edu/data/puias/computational/6/i386/perl-Git-1.8.3.1-1.sdl6.noarch.rpm
 $ yum update  git-1.8.3.1-1.sdl6.x86_64.rpm perl-Git-1.8.3.1-1.sdl6.noarch.rpm
+
+On CentOS, install python27-python-test using these commands::
+
+   $ sudo bash
+   $ scl enable python27 bash
+   $ yum install python27-python-test
 
 
 How to use this buildout
