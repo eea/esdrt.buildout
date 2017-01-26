@@ -87,7 +87,7 @@ def buildout():
     """
     Rerun buildout.
     """
-    command = 'scl enable python27 "{0}/bin/buildout -c {0}/{1} -vv"'.format(
+    command = 'scl enable python27 "{0}/bin/buildout -c {0}/{1}"'.format(
         env.directory, env.buildout_config)
     sudo(command, user=env.deploy_user)
 
