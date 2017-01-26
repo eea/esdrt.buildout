@@ -43,6 +43,7 @@ def stop():
     """
     command1 = 'scl enable python27 "{}/bin/www1 stop"'.format(env.directory)
     command2 = 'scl enable python27 "{}/bin/www2 stop"'.format(env.directory)
+    command2 = 'scl enable python27 "{}/bin/zeoserver stop"'.format(env.directory)
     sudo(command1, user=env.deploy_user)
     sudo(command2, user=env.deploy_user)
 
@@ -53,6 +54,7 @@ def start():
     """
     command1 = 'scl enable python27 "{}/bin/www1 start"'.format(env.directory)
     command2 = 'scl enable python27 "{}/bin/www2 start"'.format(env.directory)
+    command2 = 'scl enable python27 "{}/bin/zeoserver start"'.format(env.directory)
     sudo(command1, user=env.deploy_user)
     sudo(command2, user=env.deploy_user)
 
@@ -64,6 +66,8 @@ def restart():
     command1 = 'scl enable python27 "{}/bin/www1 restart"'.format(
         env.directory)
     command2 = 'scl enable python27 "{}/bin/www2 restart"'.format(
+        env.directory)
+    command2 = 'scl enable python27 "{}/bin/zeoserver restart"'.format(
         env.directory)
     sudo(command1, user=env.deploy_user)
     sudo(command2, user=env.deploy_user)
@@ -80,6 +84,7 @@ def status():
     # Deploy and running status
     _with_deploy_env(['scl enable python27 "./bin/www1 status"',
                       'scl enable python27 "./bin/www2 status"',
+                      'scl enable python27 "./bin/zeoserver status"',
                       'git log -1'])
 
 
