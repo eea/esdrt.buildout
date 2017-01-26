@@ -1,5 +1,5 @@
 <VirtualHost *:80>
-    ServerName ${www-domain}
+    ServerName ${configuration:www-domain}
 
     Redirect permanent / https://${configuration:www-domain}/
 
