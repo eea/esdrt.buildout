@@ -11,7 +11,7 @@
 
     RewriteEngine On
 
-    RewriteRule ^/(.*) http://${haproxy-config:frontend-bind}/VirtualHostBase/https/${configuration:www-domain}:443/Plone/VirtualHostRoot/$1 [P,L]
+    RewriteRule ^/(.*) http://${varnish-configuration:backend-host}:${varnish-configuration:backend-port}/VirtualHostBase/https/${configuration:www-domain}:443/Plone/VirtualHostRoot/$1 [P,L]
 
     SSLEngine on
     SSLCertificateFile /etc/pki/tls/certs/eea-rapidssl-starcert.pem
