@@ -239,9 +239,6 @@ sub vcl_backend_response {
     } elsif (beresp.ttl < 0s) {
         set beresp.http.X-Cacheable = "NO - TTL < 0";
         set beresp.uncacheable = true;
-    } elsif (beresp.ttl == 0s) {
-        set beresp.http.X-Cacheable = "NO - TTL = 0";
-        set beresp.uncacheable = true;
 
     # Varnish determined the object was cacheable
     } else {
