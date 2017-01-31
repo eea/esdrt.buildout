@@ -97,32 +97,8 @@ sub vcl_recv {
         return(pass);
     }
 
-    /* cookies for pass */
-    if (req.http.Cookie && req.http.Cookie ~ "__ac(|_(name|password|persistent))=") {
-        if (req.url ~ "\.(js|css|kss)") {
-            unset req.http.cookie;
-            return(pipe);
-        }
-        return(pass);
-    }
-
-    /* Cookie whitelist, remove all not in there */
-    if (req.http.Cookie) {
-        set req.http.Cookie = ";" + req.http.Cookie;
-        set req.http.Cookie = regsuball(req.http.Cookie, "; +", ";");
-        set req.http.Cookie = regsuball(req.http.Cookie, ";(statusmessages|__ac|_ZopeId|__cp)=", "; \1=");
-        set req.http.Cookie = regsuball(req.http.Cookie, ";[^ ][^;]*", "");
-        set req.http.Cookie = regsuball(req.http.Cookie, "^[; ]+|[; ]+$", "");
-        if (req.http.Cookie == "") {
-            unset req.http.Cookie;
-        }
-    }
-
-
     # Large static files should be piped, so they are delivered directly to the end-user without
     # waiting for Varnish to fully read the file first.
-
-    # TODO: make this configureable.
 
     if (req.url ~ "^[^?]*\.(mp3,mp4|rar|tar|tgz|gz|wav|zip)(\?.*)?$") {
         return(pipe);
