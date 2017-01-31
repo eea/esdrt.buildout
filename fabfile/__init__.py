@@ -65,6 +65,24 @@ def restart():
     start()
 
 
+def restart_haproxy():
+    sudo('killall haproxy', user=env.deploy_user)
+    cmd = '{envdir}/bin/haproxy -D -f {envdir}/etc/haproxy.cfg'
+    sudo(cmd.format(envdir=env.directory), user=env.deploy_user)
+
+
+def restart_varnish():
+    sudo('killall varnishd', user=env.deploy_user)
+    cmd = '{envdir}/bin/varnish-script'
+    sudo(cmd.format(envdir=env.directory), user=env.deploy_user)
+
+
+def restart_memcached():
+    cmd = '{envdir}/bin/memcached'.format(envdir=env.directory)
+    for action in ('stop', 'start'):
+        sudo('{} {}'.format(cmd, action), user=env.deploy_user)
+
+
 def status():
     run('uptime')
     if env.executable == 'www':
