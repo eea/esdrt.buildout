@@ -83,6 +83,11 @@ def restart_memcached():
         sudo('{} {}'.format(cmd, action), user=env.deploy_user)
 
 
+def cat_instance():
+    cmd = 'cat {envdir}/bin/www1 | grep esdrt.content'.format(envdir=env.directory)
+    sudo(cmd, user=env.deploy_user)
+
+
 def status():
     run('uptime')
     if env.executable == 'www':
