@@ -4,6 +4,7 @@ Fabric script for deploying Plone consistently.
 
 from __future__ import with_statement
 from fabric.api import *
+from fabric.context_managers import cd
 
 
 try:
@@ -100,11 +101,22 @@ def buildout():
     sudo(cmd, user=env.deploy_user)
 
 
+def refresh_virtualenv():
+    cmds = (
+        'if [ -f ./bin/activate ]; then rm ./bin/activate; fi',
+        'scl enable python27 ./install.sh'
+    )
+    with cd(env.directory):
+        for cmd in cmds:
+            sudo(cmd, user=env.deploy_user)
+
+
 def deploy():
     """
     Update code on the server and restart zope.
     """
     pull()
     stop()
+    # refresh_virtualenv()
     buildout()
     start()
