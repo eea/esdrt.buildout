@@ -116,7 +116,7 @@ def deploy():
     Update code on the server and restart zope.
     """
     pull()
-    stop()
     # refresh_virtualenv()
     buildout()
+    stop()
     start()
